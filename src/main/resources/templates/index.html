@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{public/head :: head}"></head>
+<body>
+<!-- Navbar -->
+<div th:replace="~{public/nav :: nav}"></div>
+
+<!-- Main Content -->
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron bg-light p-5 rounded">
+                <h1 class="display-4" th:text="${message}">Welcome!</h1>
+                <p class="lead">This is a Spring Boot application with Thymeleaf and Bootstrap 5.</p>
+                <hr class="my-4">
+                <p>Get started by editing the MainController and this template.</p>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Feature 1</h5>
+                    <p class="card-text">Some quick example text to build on the card title.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Feature 2</h5>
+                    <p class="card-text">Some quick example text to build on the card title.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Feature 3</h5>
+                    <p class="card-text">Some quick example text to build on the card title.</p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{public/footer :: footer}"></div>
+
+<!-- Bootstrap JS -->
+<div th:replace="~{public/scripts :: scripts}"></div>
+</body>
+</html>
