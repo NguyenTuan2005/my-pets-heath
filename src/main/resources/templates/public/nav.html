@@ -1,27 +1,122 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>PetCare Navbar</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <style>
+        /* Thanh navbar tổng thể */
+        .navbar-petcare {
+            background-color: #fff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            padding: 0.5rem 0;
+        }
+
+        /* Logo */
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        /* Link trong nav */
+        .navbar-nav .nav-link {
+            color: #008b6f !important; /* Xanh ngọc giống Petcare */
+            font-weight: 600;
+            font-size: 1rem;
+            margin: 0 12px;
+            position: relative;
+            transition: all 0.25s ease-in-out;
+        }
+
+        /* Hover đổi màu và underline */
+        .navbar-nav .nav-link:hover {
+            color: #00b386 !important;
+        }
+
+        .navbar-nav .nav-link::after {
+            content: "";
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #00b386;
+            transition: width 0.25s ease-in-out;
+        }
+
+        .navbar-nav .nav-link:hover::after,
+        .navbar-nav .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* Dropdown menu */
+        .dropdown-menu {
+            border: none;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            border-radius: 0;
+        }
+
+        .dropdown-item {
+            color: #333;
+            font-weight: 500;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+            color: #00b386;
+        }
+
+        /* Responsive chỉnh khoảng cách */
+        @media (max-width: 991px) {
+            .navbar-nav {
+                text-align: center;
+            }
+            .navbar-nav .nav-link {
+                margin: 8px 0;
+            }
+        }
+    </style>
+</head>
 <body>
-<!-- Navbar -->
-<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-primary">
+
+<!-- NAVBAR -->
+<nav th:fragment="nav" class="navbar navbar-expand-lg navbar-light navbar-petcare sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="/">Spring Boot App</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <!-- Logo -->
+        <a class="navbar-brand" th:href="@{/}">
+            <img th:src="@{/images/petcare_logo.png}" alt="PetCare Logo">
+        </a>
+
+        <!-- Nút thu gọn khi mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <!-- Danh sách link -->
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link active" th:href="@{/}">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/about}">Giới thiệu</a></li>
+
+                <!-- Dropdown Dịch vụ -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="serviceDropdown" role="button"
+                       data-bs-toggle="dropdown">Dịch vụ</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/service/emergency}">Cấp cứu 24/7</a></li>
+                        <li><a class="dropdown-item" th:href="@{/service/grooming}">Chăm sóc & Grooming</a></li>
+                        <li><a class="dropdown-item" th:href="@{/service/vaccination}">Tiêm phòng & Khám</a></li>
+                    </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
+
+                <li class="nav-item"><a class="nav-link" th:href="@{/info}">Thông tin</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Liên hệ</a></li>
+                <li class="nav-item"><a class="nav-link" th:href="@{/en}">ENGLISH</a></li>
             </ul>
         </div>
     </div>
 </nav>
+
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
