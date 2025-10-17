@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:replace="~{public/layout :: layout(~{::content}, 'Dich vu', ${notification})}">
+<body>
+    <div th:fragment="content">
+        <div class="container text-center mt-5">
+            Dich vu
+        </div>
+    </div>
+</body>
+</html>

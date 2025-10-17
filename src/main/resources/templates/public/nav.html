@@ -4,20 +4,25 @@
 <!-- Navbar -->
 <nav th:fragment="nav" class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container">
-        <a class="navbar-brand" href="/">Spring Boot App</a>
+        <a class="navbar-brand" th:href="@{/}">Spring Boot App</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/">Home</a>
+                    <a class="nav-link active" th:href="@{/}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" th:href="@{/dich-vu}" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Dich vu
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
+                        <li><a class="dropdown-item" th:href="@{/dich-vu/chuan-doan-benh}">Chuan doan benh</a></li>
+                    </ul>
                 </li>
             </ul>
         </div>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:fragment="layout(content, pageTitle, notification=null)">
+<head th:replace="~{public/head :: head(${pageTitle})}"></head>
+<body>
+<div class="d-flex flex-column min-vh-100">
+
+    <!-- Navbar -->
+    <div th:replace="~{public/nav :: nav}"></div>
+
+    <!-- Content area (your "children") -->
+    <main class="flex-grow-1 position-relative">
+        <!-- Notification (like your React alert) -->
+        <div th:if="${notification != null}"
+             th:class="|alert alert-${notification.type == 'error' ? 'danger' : notification.type} alert-dismissible fade show position-fixed top-0 end-0 m-3|"
+             role="alert"
+             style="z-index: 9999; min-width: 300px; margin-top: 70px;">
+            <span th:text="${notification.message}">Something happened</span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        <!-- Child content goes here -->
+        <div th:replace="${content}"></div>
+    </main>
+
+    <!-- Footer -->
+    <div th:replace="~{public/footer :: footer}"></div>
+</div>
+
+<!-- Bootstrap & app scripts -->
+<div th:replace="~{public/scripts :: scripts}"></div>
+</body>
+</html>
