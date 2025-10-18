@@ -12,7 +12,8 @@
     <main class="flex-grow-1 position-relative">
         <!-- Notification (like your React alert) -->
         <div th:if="${notification != null}"
-             th:class="|alert alert-${notification.type == 'error' ? 'danger' : notification.type} alert-dismissible fade show position-fixed top-0 end-0 m-3|"
+             th:class="|alert alert-${notification.type == 'error' ? 'danger' : notification.type}
+                alert-dismissible fade show position-fixed top-0 end-0 m-3|"
              role="alert"
              style="z-index: 9999; min-width: 300px; margin-top: 70px;">
             <span th:text="${notification.message}">Something happened</span>

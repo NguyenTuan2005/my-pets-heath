@@ -11,6 +11,12 @@ public class MainController {
     @GetMapping("/")
     public String home(Model model) {
         model.addAttribute("message", "Welcome to the Home Page!");
-        return "index";
+        return "about/about-intro";
+    }
+
+    @GetMapping("/about")
+    public String about(Model model) {
+        model.addAttribute("message", "Welcome to the Home Page!");
+        return "about/about-intro";
     }
 }

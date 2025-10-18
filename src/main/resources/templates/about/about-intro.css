@@ -1,0 +1,148 @@
+:root {
+  /* Primary color scale (base #C7F2D0) */
+  --color-primary-100: #F6FFF6; /* very light tint */
+  --color-primary-200: #EAF9EA;
+  --color-primary-300: #DFF2DA;
+  --color-primary-400: #C7F2D0; /* base */
+  --color-primary-500: #A8E6B7; /* darker tint */
+  --color-primary-600: #84D896; /* dark */
+
+  /* Neutral and accents */
+  --color-bg: #FBFEFC;
+  --color-surface: #FFFFFF;
+  --color-text: #233329;
+  --color-muted: #6B756B;
+  --color-accent: #387A4B;
+
+  /* Design tokens */
+  --radius-lg: 12px;
+  --radius-md: 8px;
+  --shadow-sm: 0 4px 10px rgba(17,24,17,0.06);
+  --shadow-md: 0 8px 18px rgba(17,24,17,0.09);
+
+  /* Typographic scale */
+  --fs-base: 16px;
+  --fs-sm: 0.9rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.5rem;
+}
+
+/* Typography and page */
+body {
+    font-family: "Inter", "Roboto", Arial, sans-serif;
+    font-size: var(--fs-base);
+    line-height: 1.6;
+    margin: 40px auto;
+    max-width: 1100px;
+    color: var(--color-text);
+    background-color: var(--color-bg);
+    padding: 20px;
+}
+
+h1 {
+    color: var(--color-accent);
+    font-size: 2.25rem; /* scale: large */
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 36px;
+}
+
+/* logo */
+.site-logo {
+    display: block;
+    margin: 0 auto 30px;
+    width: 160px;
+    height: auto;
+}
+
+/* team layout */
+.team-section {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* team member card with radial background */
+.team-member {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    background:
+      radial-gradient(circle at 10% 20%, rgba(199,242,208,0.50), transparent 35%),
+      radial-gradient(circle at 85% 80%, rgba(168,230,183,0.18), transparent 25%),
+      linear-gradient(180deg, var(--color-surface), var(--color-surface));
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(124,174,134,0.18);
+    transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    overflow: hidden;
+    position: relative;
+    backdrop-filter: blur(0.6px); /* subtle smoothing */
+}
+
+.team-member:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(124,174,134,0.28);
+}
+
+/* image */
+.team-member img {
+    width: 220px;
+    height: 220px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 6px 18px rgba(30,60,40,0.06);
+}
+
+/* info */
+.member-info {
+    flex: 1;
+}
+
+.member-name {
+    font-size: var(--fs-lg);
+    font-weight: 700;
+    text-transform: none;
+    color: var(--color-accent);
+    margin-bottom: 8px;
+}
+
+.member-info p {
+    margin: 0;
+    text-align: justify;
+    color: var(--color-muted);
+    font-size: var(--fs-md);
+}
+
+/* responsive */
+@media (max-width: 900px) {
+    .team-member {
+        gap: 18px;
+        padding: 18px;
+    }
+
+    .team-member img {
+        width: 180px;
+        height: 180px;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-member {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .team-member img {
+        width: 160px;
+        height: 160px;
+    }
+
+    .member-info p {
+        text-align: left;
+    }
+}
