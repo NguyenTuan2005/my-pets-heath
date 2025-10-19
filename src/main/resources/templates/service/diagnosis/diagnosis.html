@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en"
+      th:replace="~{public/layout :: layout(~{::content}, 'Chuan doan benh', ${notification})}">
+<body>
+    <div th:fragment="content">
+        <div class="container-fluid py-4">
+            <!-- Breadcrumb -->
+            <div th:replace="~{service/diagnosis/breadcrumb :: breadcrumb}"></div>
+
+            <div class="row g-4">
+                <!-- Chat History (Left Sidebar) -->
+                <div class="col-lg-4 col-xl-3">
+                    <div th:replace="~{service/diagnosis/chatHistory :: chatHistory}"></div>
+                </div>
+
+                <!-- Main Chat Area -->
+                <div class="col-lg-8 col-xl-9">
+                    <div th:replace="~{service/diagnosis/chatBox :: chatBox}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

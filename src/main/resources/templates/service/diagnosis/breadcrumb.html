@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+    <div th:fragment="breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb bg-light p-3 rounded-3 shadow-sm">
+                <li class="breadcrumb-item"><a th:href="@{/}">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Chẩn đoán bệnh</li>
+            </ol>
+        </nav>
+    </div>
+</body>
+</html>
