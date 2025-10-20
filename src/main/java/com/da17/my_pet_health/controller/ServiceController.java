@@ -1,8 +1,8 @@
 package com.da17.my_pet_health.controller;
 
-import com.da17.my_pet_health.dto.AIMessage;
 import com.da17.my_pet_health.entity.Chat;
 import com.da17.my_pet_health.entity.Message;
+import com.da17.my_pet_health.enums.MessageType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -31,9 +31,9 @@ public class ServiceController {
 
         List<Message> messages = List.of(
             Message.builder().content("user send message").build(),
-            AIMessage.builder().content("ai response message").aiModelName("gemini").build(),
+            Message.builder().content("ai response message").type(MessageType.isResponse).build(),
             Message.builder().content("user send another message").build(),
-            AIMessage.builder().content("ai response another message").aiModelName("gemini").build()
+            Message.builder().content("ai response another message").type(MessageType.isResponse).build()
         );
 
         Chat activeChat = Chat.builder().messages(messages).build();
