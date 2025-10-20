@@ -83,7 +83,7 @@
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" th:href="@{/}">
-            <img th:src="@{/images/logo.png}" alt="PetCare Logo">
+            <img th:src="@{/images/logo.png}" style="width: 70px" alt="PetCare Logo">
         </a>
 
         <!-- Nút thu gọn khi mobile -->
@@ -95,17 +95,17 @@
         <!-- Danh sách link -->
         <div class="collapse navbar-collapse" id="navbarNav">
 
-            <ul class="navbar-nav ms-auto">
+            <ul class="navbar-nav ms-auto text-nowrap">
                 
-                <li class="nav-item"><a class="nav-link active" th:href="@{/}">Trang chủ</a></li>
+                <li class="nav-item"><a class="nav-link active " th:href="@{/}">Trang chủ</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/about}">Giới thiệu</a></li>
               
                 <ul class="nav-item dropdown ps-0">
                     <a class="nav-link dropdown-toggle" th:href="@{/dich-vu}" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Dich vu
+                        Dịch vụ
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
-                        <li><a class="dropdown-item" th:href="@{/dich-vu/chuan-doan-benh}">Chuan doan benh</a></li>
+                        <li><a class="dropdown-item" th:href="@{/dich-vu/chuan-doan-benh}">Chuẩn đoán bệnh</a></li>
                     </ul>
                 </ul>
 
