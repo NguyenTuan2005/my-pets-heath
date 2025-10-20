@@ -100,12 +100,14 @@
                 <li class="nav-item"><a class="nav-link active" th:href="@{/}">Trang chủ</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/about}">Giới thiệu</a></li>
               
-                <li class="nav-item dropdown">
+                <ul class="nav-item dropdown ps-0">
                     <a class="nav-link dropdown-toggle" th:href="@{/dich-vu}" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Dich vu
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
                         <li><a class="dropdown-item" th:href="@{/dich-vu/chuan-doan-benh}">Chuan doan benh</a></li>
+                    </ul>
+                </ul>
 
                 <li class="nav-item"><a class="nav-link" th:href="@{/info}">Thông tin</a></li>
                 <li class="nav-item"><a class="nav-link" th:href="@{/contact}">Liên hệ</a></li>

@@ -8,9 +8,9 @@
     <!-- Navbar -->
     <div th:replace="~{public/nav :: nav}"></div>
 
-    <!-- Content area (your "children") -->
+    <!-- Content area -->
     <main class="flex-grow-1 position-relative">
-        <!-- Notification (like your React alert) -->
+        <!-- Notification -->
         <div th:if="${notification != null}"
              th:class="|alert alert-${notification.type == 'error' ? 'danger' : notification.type}
                 alert-dismissible fade show position-fixed top-0 end-0 m-3|"
@@ -20,7 +20,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
 
-        <!-- Child content goes here -->
+        <!-- Child content -->
         <div th:replace="${content}"></div>
     </main>
 

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<div th:fragment="chatBox">
+    <div class="card">
+        <div class="card-body" style="height: 500px; overflow-y: auto; overflow-x: hidden" id="chatMessages">
+            <div th:each="message : ${activeChat.messages}"
+                 class="mb-3">
+                <div th:class="${message.type.isResponse()} ? 'text-end' : 'text-start'">
+                    <div class="d-inline-block p-2 rounded-3"
+                         style="max-width: 75%"
+                         th:classappend="${message.type.isResponse()} ? 'bg-primary text-white text-start' : 'bg-light border'"
+                         th:text="${message.content}">Nội dung tin nhắn
+                    </div>
+                    <div class="text-muted small"
+                         th:text="${#temporals.format(message.getUpdateAtAsLocalDateTime(), 'dd/MM/yyyy HH:mm')}">Ngày
+                        giờ
+                    </div>
+                </div>
+            </div>
+            <!-- Fallback if no messages -->
+            <div id="noMessage" th:if="${activeChat.messages.isEmpty()}" class="text-muted text-center">
+                Chưa có tin nhắn trong cuộc trò chuyện này
+            </div>
+        </div>
+        <div class="card-footer">
+            <form id="messageForm" class="d-flex gap-2">
+                <input type="hidden" th:value="${activeChat.id}" name="chatId">
+                <textarea class="form-control" style="height: 35px !important;" name="message" id="message" placeholder="Nhập tin nhắn..."
+                       required></textarea>
+                <button type="submit" class="btn btn-primary">Gửi</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        document.getElementById("messageForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            let messageInput = document.getElementById("message");
+            let messageContent = messageInput.value.trim();
+            if (messageContent === "") return;
+            let userMessageElement = document.createElement("div");
+            userMessageElement.innerHTML = `
+                <div class="text-start">
+                    <div class="d-inline-block text-break p-2 rounded-3 bg-light border" style="max-width: 75%">${messageContent}</div>
+                    <div class="text-muted small"> ${new Date().toLocaleString('en-GB', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })}</div>
+                </div>
+            `;
+            document.getElementById("chatMessages").appendChild(userMessageElement);
+            const noMessageEl = document.getElementById("noMessage");
+            if (noMessageEl) {
+                noMessageEl.classList.add("d-none");
+            }
+
+            let messageElement = document.createElement("div");
+
+            fetch("/chat", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    chatId: document.querySelector("input[name='chatId']").value,
+                    message: messageContent
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    messageInput.value = "";
+                    messageInput.focus();
+
+                    messageElement.innerHTML = `
+                        <div class="text-end">
+                            <div class="d-inline-block text-break p-2 rounded-3 bg-primary text-white text-start" style="max-width: 75%">
+                                ${data.message.content}
+                            </div>
+                            <div class="text-muted small">${data.message.timestamp}</div>
+                        </div>
+                    `;
+                } else {
+                    messageElement.innerHTML = `
+                        <div class="alert alert-danger">
+                            There was an issue sending your message. Please try again.
+                        </div>
+                    `;
+                }
+                document.getElementById("chatMessages").appendChild(messageElement);
+                document.getElementById("chatMessages").scrollTop = document.getElementById("chatMessages").scrollHeight;
+            })
+            .catch(error => {
+                console.error("Error sending message:", error);
+
+                messageElement.innerHTML = `
+                    <div class="alert alert-danger">
+                        There was an error with your request. Please try again later.
+                    </div>
+                `;
+                document.getElementById("chatMessages").appendChild(messageElement);
+            });
+        });
+    </script>
+</div>
+</body>
+</html>
