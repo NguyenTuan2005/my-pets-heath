@@ -7,18 +7,127 @@
             <!-- Breadcrumb -->
             <div th:replace="~{service/diagnosis/breadcrumb :: breadcrumb}"></div>
 
-            <div class="row g-4">
-                <!-- Chat History (Left Sidebar) -->
-                <div class="col-lg-4 col-xl-3">
-                    <div th:replace="~{service/diagnosis/chatHistory :: chatHistory}"></div>
+            <div class="row g-3">
+                <!-- Chat History (Hidden on sx, sm and md) -->
+                <div class="d-none d-lg-block col-lg-3" id="chatHistoryColumn">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                            <h6 class="mb-0" id="chatHistoryTitle">
+                                <i class="fas fa-history me-2"></i>Lịch sử trò chuyện
+                            </h6>
+                            <button class="btn btn-sm btn-outline-light border-0" id="toggleChatHistory" type="button">
+                                <i class="fas fa-chevron-left" id="toggleIcon"></i>
+                            </button>
+                        </div>
+                        <div id="chatHistoryContent">
+                            <div th:replace="~{service/diagnosis/chatHistory :: chatHistory}"></div>
+                        </div>
+                        <div id="chatHistoryCollapsedContent" class="d-none">
+                            <div th:include="~{service/diagnosis/chatHistory :: chatHistoryCollapsed}"></div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Main Chat Area -->
-                <div class="col-lg-8 col-xl-9">
-                    <div th:replace="~{service/diagnosis/chatBox :: chatBox}"></div>
+                <div class="col-md-12 col-lg-9" id="mainChatColumn">
+                    <div class="card h-100 shadow-sm">
+                        <div class="card-header bg-light border-bottom">
+                            <div class="d-flex align-items-center">
+                                <div class="avatar-sm bg-primary rounded-circle d-flex align-items-center justify-content-center me-3">
+                                    <i class="fas fa-robot text-white"></i>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">AI Diagnosis Assistant</h6>
+                                    <small class="text-muted">Online</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div th:replace="~{service/diagnosis/chatBox :: chatBox}"></div>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <!-- Mobile Chat Toggle Button -->
+        <button class="mobile-btn btn btn-primary d-lg-none position-fixed bottom-0 start-0 m-3 rounded-circle shadow"
+                type="button" data-bs-toggle="offcanvas" data-bs-target="#chatHistoryOffcanvas">
+            <i class="fas fa-history"></i>
+        </button>
+
+        <!-- Mobile Offcanvas for Chat History -->
+        <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="chatHistoryOffcanvas">
+            <div class="offcanvas-header bg-primary text-white">
+                <h5 class="offcanvas-title">Lịch sử trò chuyện</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body">
+                <div th:replace="~{service/diagnosis/chatHistory :: chatHistory}"></div>
+            </div>
+        </div>
+        <style>
+            .avatar-sm {
+                width: 40px;
+                height: 40px;
+            }
+
+            .mobile-btn {
+                width: 40px;
+                height: 40px;
+                padding: 0 !important;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                box-sizing: border-box;
+                border-radius: 50% !important;
+                font-size: 18px;
+            }
+            #chatHistoryColumn.col-lg-1 .card-header {
+                text-align: center;
+                padding: 0.75rem 0.25rem;
+            }
+        </style>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const chatHistoryColumn = document.getElementById('chatHistoryColumn');
+                const mainChatColumn = document.getElementById('mainChatColumn');
+                const toggleButton = document.getElementById('toggleChatHistory');
+                const toggleIcon = document.getElementById('toggleIcon');
+                const chatHistoryTitle = document.getElementById('chatHistoryTitle');
+                const chatHistoryContent = document.getElementById('chatHistoryContent');
+                const chatHistoryCollapsedContent = document.getElementById('chatHistoryCollapsedContent');
+
+                let isCollapsed = false;
+
+                toggleButton.addEventListener('click', function() {
+                    if (isCollapsed) {
+                        // Expand
+                        chatHistoryColumn.className = 'd-none d-lg-block col-lg-3';
+                        mainChatColumn.className = 'col-md-12 col-lg-9';
+                        toggleIcon.className = 'fas fa-chevron-left';
+                        chatHistoryTitle.classList.remove("d-none");
+                        chatHistoryContent.classList.remove("d-none");
+                        chatHistoryCollapsedContent.classList.add("d-none");
+                        isCollapsed = false;
+                    } else {
+                        // Collapse
+                        chatHistoryColumn.className = 'd-none d-lg-block col-lg-1';
+                        mainChatColumn.className = 'col-md-12 col-lg-11';
+                        toggleIcon.className = 'fas fa-chevron-right';
+                        chatHistoryTitle.classList.add("d-none");
+                        chatHistoryContent.classList.add("d-none");
+                        chatHistoryCollapsedContent.classList.remove("d-none");
+
+                        // Initialize tooltips for collapsed view
+                        const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+                        tooltipTriggerList.map(function (tooltipTriggerEl) {
+                            return new bootstrap.Tooltip(tooltipTriggerEl);
+                        });
+                        isCollapsed = true;
+                    }
+                });
+            });
+        </script>
     </div>
 </body>
 </html>
