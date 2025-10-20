@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Đội ngũ phát triển</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" th:href="@{/about/about-intro.css}">
+</head>
+<body>
+<div th:replace="~{public/layout :: layout(~{::content}, 'Đội ngũ phát triển', '')}">
+    <div th:fragment="content">
+    <h1><b>Đội ngũ phát triển</b></h1>
+    <img th:src="@{/images/logo.png}" alt="PetCare Logo" class="site-logo">
+
+        <section class="team-section">
+            <!-- Trúc -->
+            <div class="team-member">
+                <img th:src="@{/about/avatar/truc.png}" alt="Huỳnh Thị Thanh Trúc">
+                <div class="member-info">
+                    <div class="member-name">Huỳnh Thị Thanh Trúc</div>
+                    <p>
+                        Sinh viên năm 3 khoa CNTT Trường Đại học Nông Lâm TPHCM
+                    </p>
+                </div>
+            </div>
+
+            <!-- Tuấn -->
+            <div class="team-member">
+                <div class="member-info">
+                    <div class="member-name">Nguyễn Võ Quốc Tuấn</div>
+                    <p>
+                        Sinh viên năm 3 khoa CNTT Trường Đại học Nông Lâm TPHCM
+                    </p>
+                </div>
+                <img th:src="@{/about/avatar/tuan.png}" alt="Nguyễn Võ Quốc Tuấn">
+            </div>
+
+            <!-- Duyên -->
+            <div class="team-member">
+                <img th:src="@{/about/avatar/duyen.png}" alt="Lê Thị Kiều Duyên">
+                <div class="member-info">
+                    <div class="member-name">Lê Thị Kiều Duyên</div>
+                    <p>
+                        Bác sĩ thực tập Lê Thị Kiều Duyên, hiện đang là sinh viên năm 5,
+                        học chuyên ngành bác sĩ thú y Trường Đại học Nông Lâm, TP.HCM. Có kinh nghiệm thực tập tại 3
+                        phòng khám thú y:
+                        Phòng khám thú y Đăng Khôi, Phòng khám thú y Hoàng Châu, Bệnh viện thú y Trường Đại học Nông Lâm
+                        TP.HCM.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Đô -->
+            <div class="team-member">
+                <div class="member-info">
+                    <div class="member-name">Võ Lâm Đô</div>
+                    <p>
+                        Sinh viên năm 4 khoa CNTY Trường Đại học Nông Lâm TPHCM
+                    </p>
+                </div>
+                <img th:src="@{/about/avatar/do.png}" alt="Võ Lâm Đô">
+            </div>
+
+            <!-- Thiệt -->
+            <div class="team-member">
+                <img th:src="@{/about/avatar/thiet.png}" alt="Võ Văn Thiệt">
+                <div class="member-info">
+                    <div class="member-name">Võ Văn Thiệt</div>
+                    <p>
+                        Sinh viên năm 3 khoa CNTT Trường Đại học Nông Lâm TPHCM
+                    </p>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</div>
+</body>
+</html>
