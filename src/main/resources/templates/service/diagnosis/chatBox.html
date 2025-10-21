@@ -26,8 +26,8 @@
         <div class="card-footer">
             <form id="messageForm" class="d-flex gap-2">
                 <input type="hidden" th:value="${activeChat.id}" name="chatId">
-                <textarea class="form-control" style="height: 35px !important;" name="message" id="message" placeholder="Nhập tin nhắn..."
-                       required></textarea>
+                <input type="text" class="form-control" name="message" id="message" placeholder="Nhập tin nhắn..."
+                       required></input>
                 <button type="submit" class="btn btn-primary">Gửi</button>
             </form>
         </div>
@@ -47,6 +47,10 @@
                 </div>
             `;
             document.getElementById("chatMessages").appendChild(userMessageElement);
+
+            messageInput.value = "";
+            messageInput.focus();
+
             const noMessageEl = document.getElementById("noMessage");
             if (noMessageEl) {
                 noMessageEl.classList.add("d-none");
@@ -67,8 +71,6 @@
             .then(response => response.json())
             .then(data => {
                 if (data.success) {
-                    messageInput.value = "";
-                    messageInput.focus();
 
                     messageElement.innerHTML = `
                         <div class="text-end">
